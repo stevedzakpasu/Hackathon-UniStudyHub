@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, List, Optional
 from pydantic import EmailStr
 from sqlmodel import Relationship, SQLModel, Field, Column, String
 from sqlalchemy import DateTime
@@ -8,7 +8,10 @@ from app.models.category import Category
 from app.models.course import Course
 
 from app.models.user import User
-
+if TYPE_CHECKING:
+    from app.models.like import Like
+    from app.models.comment import Comment
+    from app.models.report import Report
 class ResourceBase(SQLModel):
     user_id: int =  Field(foreign_key="user.id")
     course_id: int = Field(foreign_key="course.id")
@@ -21,6 +24,11 @@ class ResourceBase(SQLModel):
     category_id: Optional[int] = Field(default=None, foreign_key="category.id")
     category: Category = Relationship(back_populates="resource")
     course: Course = Relationship(back_populates="resource")
+    likes: List["Like"] = Relationship(back_populates="resource")
+    comments: List["Comment"] = Relationship(back_populates="resource")
+    reports: List["Report"] = Relationship(back_populates="resource")
+
+
 
 
 class ResourceCreate(ResourceBase):
