@@ -24,6 +24,7 @@ class CRUDUser(CRUDBase[User, UserAdminCreate, UserUpdate]):
             username=obj_in.username,
             email=obj_in.email,
             hashed_password=get_hashed_password(obj_in.password),
+            university_id= obj_in.university_id
     
         )
 
@@ -42,7 +43,9 @@ class CRUDUser(CRUDBase[User, UserAdminCreate, UserUpdate]):
             hashed_password=get_hashed_password(obj_in.password),
             is_superuser=obj_in.is_superuser,
             is_active=obj_in.is_active,
-            is_verified = obj_in.is_verified
+            is_verified = obj_in.is_verified,
+            university_id= obj_in.university_id,
+            program_id= obj_in.program_id
 
         )
         session.add(db_obj)

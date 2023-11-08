@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, List, Optional
 from sqlmodel import Relationship, SQLModel, Field, Column, String
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
-from app.models.userprogram import UserProgram
+# from app.models.userprogram import UserProgram
 if TYPE_CHECKING:
     from app.models.user import User
 
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 class ProgramBase(SQLModel):
     name : str = Field(
         index=True, sa_column=Column("name", String, unique=True))
-    users: List["User"] = Relationship(back_populates="programs", link_model=UserProgram)
+    users: List["User"] = Relationship(back_populates="program")
 
 class ProgramCreate(SQLModel):
     name : str = Field(

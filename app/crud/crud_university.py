@@ -25,6 +25,7 @@ class CRUDUniversity(CRUDBase[University, UniversityCreate, UniversityUpdate]):
 
         db_obj = University(
             name= obj_in.name,
+            
 
         )
 
