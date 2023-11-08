@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 class UniversityBase(SQLModel):
     name : str = Field(
         index=True, sa_column=Column("name", String, unique=True))
-    user: List["User"] = Relationship(back_populates="universities", link_model=UserUniversity)
+    users: List["User"] = Relationship(back_populates="universities", link_model=UserUniversity)
 
 class UniversityCreate(SQLModel):
     name : str = Field(

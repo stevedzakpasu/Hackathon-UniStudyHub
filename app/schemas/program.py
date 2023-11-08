@@ -1,22 +1,29 @@
-from sqlmodel import Relationship, SQLModel
-from typing import List, Optional
-from app.models.user import User
-class ProgramBase(SQLModel):
-    name: str
-    users: List["User"] = Relationship(back_populates=("program"))
+from datetime import datetime
+from typing import TYPE_CHECKING, List, Optional
+from sqlmodel import Relationship, SQLModel, Field, Column, String
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
+from app.models.userprogram import UserProgram
+if TYPE_CHECKING:
+    from app.models.user import User
 
-class ProgramCreate(ProgramBase):
-    pass 
-   
-class ProgramCreateReturn(ProgramBase):
-    id: int 
+
+class ProgramBase(SQLModel):
+    name : str = Field(
+        index=True, sa_column=Column("name", String, unique=True))
+    users: List["User"] = Relationship(back_populates="programs", link_model=UserProgram)
+
+class ProgramCreate(SQLModel):
+    name : str = Field(
+        index=True, sa_column=Column("course_code", String, unique=True))
+
+
 
 class ProgramRead(ProgramBase):
-    id:int 
+    id: int
 
-class ProgramAdminUpdate(SQLModel):
-    name: Optional[str] = None 
- 
 
-class ProgramUpdate(SQLModel):
-    pass
+class ProgramUpdate(SQLModel): 
+    name: Optional[str] = None
+
+
