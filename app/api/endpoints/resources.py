@@ -56,7 +56,7 @@ async def upload_resource(
 
     return mega_link
 
-@router.post("/resources", dependencies=[Depends(get_current_active_superuser)])
+@router.post("/resources", dependencies=[Depends(get_current_active_user)])
 async def create_resource(
     *,
     session: Session = Depends(get_session),
