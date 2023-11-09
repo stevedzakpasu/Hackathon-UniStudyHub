@@ -37,7 +37,7 @@ async def upload_resource(
         temp_file.write(file.file.read())
         temp_file_path = temp_file.name
     
-    newFile = file.filename +".pdf"
+    newFile = file.filename #+".pdf"
     # os.rename(temp_file_path, newFile)
     shutil.copy(src=temp_file_path,dst=newFile)
 
