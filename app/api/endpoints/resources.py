@@ -75,7 +75,7 @@ def get_resource(
     session: Session = Depends(get_session),
     id: str
     ):
-    db_resource = resource.get_by_resource_code(session=session, id=id)
+    db_resource = resource.get_by_id(session=session, id=id)
     if not db_resource:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
