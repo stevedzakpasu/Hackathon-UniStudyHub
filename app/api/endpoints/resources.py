@@ -70,10 +70,18 @@ async def download_resource(url: str):
         # Extract the filename from the URL
         filename = os.path.basename(url)
 
+        # Determine the media type based on the file extension
+        media_type = "application/octet-stream"
+        if filename.endswith(".txt"):
+            media_type = "text/plain"
+        elif filename.endswith(".pdf"):
+            media_type = "application/pdf"
+        # Add more file types and corresponding media types as needed
+
         # Check if the file was downloaded successfully
         if downloaded_file_path:
-            # Send the file as a response to the client with the actual filename
-            return FileResponse(downloaded_file_path, filename=filename)
+            # Send the file as a response to the client with the actual filename and appropriate media type
+            return FileResponse(downloaded_file_path, filename=filename, media_type=media_type)
         else:
             # If the download fails, raise an HTTPException
             raise HTTPException(status_code=500, detail="Failed to download the file")
