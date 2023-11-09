@@ -8,13 +8,13 @@ from app.models.resource import Resource
 
 
 
-
 class LikeBase(SQLModel):
 
     resource_id : int = Field(foreign_key="resource.id", default=None)
     created_at: Optional[datetime] = Field(
         sa_column=Column(DateTime(timezone=True), server_default=func.now()))
     resource: Resource = Relationship(back_populates="like")
+    
 
 class LikeCreate(LikeBase):
     pass

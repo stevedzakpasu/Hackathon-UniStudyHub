@@ -32,7 +32,12 @@ class ResourceBase(SQLModel):
 
 
 class ResourceCreate(ResourceBase):
-    pass
+    user_id: Optional[int] =  Field(foreign_key="user.id")
+    course_id: Optional[int] = Field(foreign_key="course.id")
+    description: Optional[str]
+    url: Optional[str]
+    user: User = Relationship(back_populates="resource")
+    category_id: Optional[int] = Field(default=None, foreign_key="category.id")
 
 
 class ResourceCreateReturn(ResourceBase):
@@ -42,6 +47,8 @@ class ResourceCreateReturn(ResourceBase):
 class ResourceRead(ResourceBase):
     id:int
 
+class ResourceReadWIthLikes(SQLModel):
+    likes: List["Like"] = []
 
 class ResourceUpdate(SQLModel):
     description: Optional[str] = None
