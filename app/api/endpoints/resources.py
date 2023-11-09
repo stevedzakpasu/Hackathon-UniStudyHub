@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import UploadFile, File
+from fastapi.responses import FileResponse
 from mega import Mega
 import tempfile
 import os
@@ -51,27 +52,35 @@ async def upload_resource(
     os.remove(newFile)
     # Get the Mega download link
     mega_link = mega.get_upload_link(mega_file)
+    return mega_link
 
 
 
-# Assuming `resource_in` contains the URL field, modify the function signature accordingly if needed.
 @router.post("/download_resource", dependencies=[Depends(get_current_active_user)])
-async def download_resource(
-    *,
-    url: str ,  # Include UploadFile parameter for file upload
-):
-
+async def download_resource(url: str):
 
     # Initialize Mega client
     mega = Mega()
     m = mega.login('unistudyhub@gmail.com', 'UniStudyHub@2023')
 
-    m.download_url(url)
+    try:
+        # Download the file to the server's filesystem
+        downloaded_file_path = m.download_url(url)
 
+        # Extract the filename from the URL
+        filename = os.path.basename(url)
 
-
-
-    return True
+        # Check if the file was downloaded successfully
+        if downloaded_file_path:
+            # Send the file as a response to the client with the actual filename
+            return FileResponse(downloaded_file_path, filename=filename)
+        else:
+            # If the download fails, raise an HTTPException
+            raise HTTPException(status_code=500, detail="Failed to download the file")
+    except Exception as e:
+        # Handle other exceptions if necessary
+        raise HTTPException(status_code=500, detail=str(e))
+    
 
 @router.post("/resources", dependencies=[Depends(get_current_active_user)])
 async def create_resource(
