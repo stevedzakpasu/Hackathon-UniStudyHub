@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.core.deps import create_superuser
+from app.core.deps import create_superuser, populate_database
 from app.core.settings import settings
 from app.api.api import api_router
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,6 +19,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
+    populate_database()
     create_superuser()
 
     
