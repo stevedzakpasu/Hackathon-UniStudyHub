@@ -5,7 +5,7 @@ import tempfile
 import os
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_resource import resource
 from app.schemas.resource import ResourceUpdate, ResourceRead, ResourceCreate,ResourceReadWIthLikes
