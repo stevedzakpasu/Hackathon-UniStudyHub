@@ -4,7 +4,6 @@ from pydantic import EmailStr
 from sqlmodel import Relationship, SQLModel, Field, Column, String
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
-# from app.models.useruniversity import UserUniversity
 
 from app.models.university import University
 from app.models.program import Program
@@ -58,8 +57,8 @@ class UserCreateReturn(SQLModel):
     is_superuser: bool
     is_active: bool
     is_verified : bool
-    university_id: int
-    program_id : int
+    university_id: Optional[int]
+    program_id : Optional[int]
 
 class UserRead(UserBase):
     id: int

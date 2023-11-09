@@ -42,13 +42,13 @@ def create_category(
 
 
 
-@router.get("/categories/{name}", response_model=CategoryRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/categories/{id}", response_model=CategoryRead, dependencies=[Depends(get_current_active_superuser)])
 def get_category(
     *,
     session: Session = Depends(get_session),
-    name: str
+    id: int
     ):
-    db_category = category.get_by_name(session=session, name=name)
+    db_category = category.get_by_id(session=session, id=id)
     if not db_category:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -78,9 +78,9 @@ def update_category(
 def delete_category(
     *,
     session: Session = Depends(get_session),
-    name: str
+    id: int
     ):
-    deleted_category = category.remove(session=session, name=name)
+    deleted_category = category.remove(session=session, id=id)
     if not deleted_category:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

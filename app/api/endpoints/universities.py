@@ -42,13 +42,13 @@ def create_university(
 
 
 
-@router.get("/universities/{university_code}", response_model=UniversityRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/universities/{id}", response_model=UniversityRead, dependencies=[Depends(get_current_active_superuser)])
 def get_university(
     *,
     session: Session = Depends(get_session),
-    university_code: str
+    id: int
     ):
-    db_university = university.get_by_university_code(session=session, university_code=university_code)
+    db_university = university.get_by_id(session=session, id=id)
     if not db_university:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -78,9 +78,9 @@ def update_university(
 def delete_university(
     *,
     session: Session = Depends(get_session),
-    university_code: str
+    id: int
     ):
-    deleted_university = university.remove(session=session, university_code=university_code)
+    deleted_university = university.remove(session=session, id=id)
     if not deleted_university:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

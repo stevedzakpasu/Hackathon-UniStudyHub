@@ -13,10 +13,10 @@ if TYPE_CHECKING:
     from app.models.comment import Comment
     from app.models.report import Report
 class ResourceBase(SQLModel):
-    user_id: int =  Field(foreign_key="user.id")
-    course_id: int = Field(foreign_key="course.id")
-    description: str 
-    url: str
+    user_id: Optional[int] =  Field(foreign_key="user.id")
+    course_id: Optional[int] = Field(foreign_key="course.id")
+    description: Optional[str]
+    url: Optional[str]
     upload_date: Optional[datetime] = Field(
         sa_column=Column(DateTime(timezone=True), server_default=func.now()))
     image_url: Optional[str]

@@ -10,6 +10,8 @@ from app.core.deps import get_session
 from app.crud.crud_resource import resource
 from app.schemas.resource import ResourceUpdate, ResourceRead, ResourceCreate
 
+import os
+
 router = APIRouter()
 
 @router.get("/resources", response_model=List[ResourceRead], dependencies=[Depends(get_current_active_superuser)])
@@ -25,36 +27,41 @@ def get_resources(
 
 
 # Assuming `resource_in` contains the URL field, modify the function signature accordingly if needed.
-@router.post("/resources", response_model=ResourceCreate, dependencies=[Depends(get_current_active_superuser)])
-def create_resource(
+@router.post("/upload_resource", dependencies=[Depends(get_current_active_superuser)])
+async def upload_resource(
     *,
-    session: Session = Depends(get_session),
-    resource_in: ResourceCreate,
-    uploaded_file: UploadFile = File(...),  # Include UploadFile parameter for file upload
+    file: UploadFile = File(...),  # Include UploadFile parameter for file upload
 ):
     # Save the uploaded file temporarily
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-        temp_file.write(uploaded_file.file.read())
+        temp_file.write(file.file.read())
         temp_file_path = temp_file.name
+    
+    newFile = file.filename +".pdf"
+    os.rename(temp_file_path, newFile)
 
     # Initialize Mega client
     mega = Mega()
     m = mega.login('unistudyhub@gmail.com', 'UniStudyHub@2023')
 
     # Upload the file to Mega
-    mega_file = m.upload(temp_file_path)
+    mega_file = m.upload(newFile)
 
+    os.remove(newFile)
     # Get the Mega download link
     mega_link = mega.get_upload_link(mega_file)
 
-    # Clean up the temporary file
-    os.remove(temp_file_path)
-
-    # Assign the Mega download link to the URL field in resource_in
-    resource_in.url = mega_link
 
 
-    # Create the resource in your database using resource.create() function (assuming it's defined somewhere)
+    return mega_link
+
+@router.post("/resources", dependencies=[Depends(get_current_active_superuser)])
+async def create_resource(
+    *,
+    session: Session = Depends(get_session),
+    resource_in: ResourceCreate,  # Include UploadFile parameter for file upload
+):
+
     new_resource = resource.create(session=session, obj_in=resource_in)
 
     return new_resource

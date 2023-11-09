@@ -42,13 +42,13 @@ def create_program(
 
 
 
-@router.get("/programs/{name}", response_model=ProgramRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/programs/{id}", response_model=ProgramRead, dependencies=[Depends(get_current_active_superuser)])
 def get_program(
     *,
     session: Session = Depends(get_session),
-    name: str
+    id: int
     ):
-    db_program = program.get_by_name(session=session, name=name)
+    db_program = program.get_by_id(session=session,id=id)
     if not db_program:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -78,9 +78,9 @@ def update_program(
 def delete_program(
     *,
     session: Session = Depends(get_session),
-    name: str
+    id: int
     ):
-    deleted_program = program.remove(session=session, name=name)
+    deleted_program = program.remove(session=session,id=id)
     if not deleted_program:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
