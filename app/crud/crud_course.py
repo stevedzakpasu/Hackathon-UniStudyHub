@@ -25,7 +25,6 @@ class CRUDCourse(CRUDBase[Course, CourseCreate, CourseUpdate]):
 
         db_obj = Course(
             name= obj_in.name,
-            category_id=obj_in.category_id,
             university_id=obj_in.university_id
 
         )
