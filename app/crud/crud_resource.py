@@ -25,7 +25,8 @@ class CRUDResource(CRUDBase[Resource, ResourceCreate, ResourceUpdate]):
             user_id=obj_in.user_id,
             category_id=obj_in.category_id,
             course_id=obj_in.course_id,
-            url=obj_in.url
+            url=obj_in.url,
+            title=obj_in.title
 
         )
 

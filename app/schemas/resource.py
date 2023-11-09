@@ -16,10 +16,10 @@ class ResourceBase(SQLModel):
     user_id: Optional[int] =  Field(foreign_key="user.id")
     course_id: Optional[int] = Field(foreign_key="course.id")
     description: Optional[str]
+    title: Optional[str]
     url: Optional[str]
     upload_date: Optional[datetime] = Field(
         sa_column=Column(DateTime(timezone=True), server_default=func.now()))
-    image_url: Optional[str]
     user: User = Relationship(back_populates="resource")
     category_id: Optional[int] = Field(default=None, foreign_key="category.id")
     category: Category = Relationship(back_populates="resource")
@@ -35,6 +35,7 @@ class ResourceCreate(ResourceBase):
     user_id: Optional[int] =  Field(foreign_key="user.id")
     course_id: Optional[int] = Field(foreign_key="course.id")
     description: Optional[str]
+    title: Optional[str]
     url: Optional[str]
     user: User = Relationship(back_populates="resource")
     category_id: Optional[int] = Field(default=None, foreign_key="category.id")
@@ -52,6 +53,8 @@ class ResourceReadWIthLikes(SQLModel):
 
 class ResourceUpdate(SQLModel):
     description: Optional[str] = None
+    title: Optional[str] =None
+
 
 
 
