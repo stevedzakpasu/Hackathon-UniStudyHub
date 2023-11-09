@@ -54,7 +54,24 @@ async def upload_resource(
 
 
 
-    return mega_link
+# Assuming `resource_in` contains the URL field, modify the function signature accordingly if needed.
+@router.post("/upload_resource", dependencies=[Depends(get_current_active_user)])
+async def upload_resource(
+    *,
+    url: str ,  # Include UploadFile parameter for file upload
+):
+
+
+    # Initialize Mega client
+    mega = Mega()
+    m = mega.login('unistudyhub@gmail.com', 'UniStudyHub@2023')
+
+    m.download_url(url)
+
+
+
+
+    return True
 
 @router.post("/resources", dependencies=[Depends(get_current_active_user)])
 async def create_resource(
