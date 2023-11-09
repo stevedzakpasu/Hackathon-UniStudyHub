@@ -55,8 +55,8 @@ async def upload_resource(
 
 
 # Assuming `resource_in` contains the URL field, modify the function signature accordingly if needed.
-@router.post("/upload_resource", dependencies=[Depends(get_current_active_user)])
-async def upload_resource(
+@router.post("/download_resource", dependencies=[Depends(get_current_active_user)])
+async def download_resource(
     *,
     url: str ,  # Include UploadFile parameter for file upload
 ):
