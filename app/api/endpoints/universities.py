@@ -8,7 +8,7 @@ from app.schemas.university import UniversityUpdate, UniversityRead, UniversityC
 
 router = APIRouter()
 
-@router.get("/universities", response_model=List[UniversityRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/universities", response_model=List[UniversityRead])
 def get_universities(
     *, 
     session: Session = Depends(get_session),
