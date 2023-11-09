@@ -9,7 +9,7 @@ from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_resource import resource
 from app.schemas.resource import ResourceUpdate, ResourceRead, ResourceCreate,ResourceReadWIthLikes
-
+import shutil
 import os
 
 router = APIRouter()
@@ -38,7 +38,8 @@ async def upload_resource(
         temp_file_path = temp_file.name
     
     newFile = file.filename +".pdf"
-    os.rename(temp_file_path, newFile)
+    # os.rename(temp_file_path, newFile)
+    shutil.copy(src=temp_file_path,dst=newFile)
 
     # Initialize Mega client
     mega = Mega()
