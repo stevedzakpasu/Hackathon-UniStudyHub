@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_university import university
 from app.schemas.university import UniversityUpdate, UniversityRead, UniversityCreate
@@ -20,7 +20,7 @@ def get_universities(
 
 
 
-@router.post("/universities", response_model=UniversityCreate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/universities", response_model=UniversityCreate, dependencies=[Depends(get_current_active_user)])
 def create_university(
     *,
     session: Session = Depends(get_session),
@@ -42,7 +42,7 @@ def create_university(
 
 
 
-@router.get("/universities/{id}", response_model=UniversityRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/universities/{id}", response_model=UniversityRead, dependencies=[Depends(get_current_active_user)])
 def get_university(
     *,
     session: Session = Depends(get_session),
@@ -57,7 +57,7 @@ def get_university(
     return db_university
 
 
-@router.put("/universities", response_model=UniversityRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/universities", response_model=UniversityRead, dependencies=[Depends(get_current_active_user)])
 def update_university(
     *,
     session: Session = Depends(get_session),
@@ -74,7 +74,7 @@ def update_university(
 
 
 
-@router.delete("/universities", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/universities", dependencies=[Depends(get_current_active_user)])
 def delete_university(
     *,
     session: Session = Depends(get_session),

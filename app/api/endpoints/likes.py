@@ -1,14 +1,14 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_like import like
 from app.schemas.like import LikeUpdate, LikeRead, LikeCreate
 
 router = APIRouter()
 
-@router.get("/likes", response_model=List[LikeRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/likes", response_model=List[LikeRead], dependencies=[Depends(get_current_active_user)])
 def get_likes(
     *, 
     session: Session = Depends(get_session),
@@ -20,7 +20,7 @@ def get_likes(
 
 
 
-@router.post("/likes", response_model=LikeCreate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/likes", response_model=LikeCreate, dependencies=[Depends(get_current_active_user)])
 def create_like(
     *,
     session: Session = Depends(get_session),
@@ -36,7 +36,7 @@ def create_like(
 
 
 
-@router.get("/likes/{name}", response_model=LikeRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/likes/{name}", response_model=LikeRead, dependencies=[Depends(get_current_active_user)])
 def get_like(
     *,
     session: Session = Depends(get_session),
@@ -51,7 +51,7 @@ def get_like(
     return db_like
 
 
-@router.put("/likes", response_model=LikeRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/likes", response_model=LikeRead, dependencies=[Depends(get_current_active_user)])
 def update_like(
     *,
     session: Session = Depends(get_session),
@@ -68,7 +68,7 @@ def update_like(
 
 
 
-@router.delete("/likes", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/likes", dependencies=[Depends(get_current_active_user)])
 def delete_like(
     *,
     session: Session = Depends(get_session),

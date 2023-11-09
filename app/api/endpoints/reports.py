@@ -1,14 +1,14 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_report import report
 from app.schemas.report import ReportCreate, ReportRead, ReportUpdate
 
 router = APIRouter()
 
-@router.get("/reports", response_model=List[ReportRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/reports", response_model=List[ReportRead], dependencies=[Depends(get_current_active_user)])
 def get_reports(
     *, 
     session: Session = Depends(get_session),
@@ -20,7 +20,7 @@ def get_reports(
 
 
 
-@router.post("/reports", response_model=ReportUpdate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/reports", response_model=ReportUpdate, dependencies=[Depends(get_current_active_user)])
 def create_report(
     *,
     session: Session = Depends(get_session),
@@ -36,7 +36,7 @@ def create_report(
 
 
 
-@router.get("/reports/{name}", response_model=ReportRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/reports/{name}", response_model=ReportRead, dependencies=[Depends(get_current_active_user)])
 def get_report(
     *,
     session: Session = Depends(get_session),
@@ -51,7 +51,7 @@ def get_report(
     return db_report
 
 
-@router.put("/reports", response_model=ReportRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/reports", response_model=ReportRead, dependencies=[Depends(get_current_active_user)])
 def update_report(
     *,
     session: Session = Depends(get_session),
@@ -68,7 +68,7 @@ def update_report(
 
 
 
-@router.delete("/reports", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/reports", dependencies=[Depends(get_current_active_user)])
 def delete_report(
     *,
     session: Session = Depends(get_session),

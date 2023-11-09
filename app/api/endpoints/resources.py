@@ -14,7 +14,7 @@ import os
 
 router = APIRouter()
 
-@router.get("/resources", response_model=List[ResourceRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/resources", response_model=List[ResourceRead], dependencies=[Depends(get_current_active_user)])
 def get_resources(
     *, 
     session: Session = Depends(get_session),
@@ -101,7 +101,7 @@ def update_resource(
 
 
 
-@router.delete("/resources", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/resources", dependencies=[Depends(get_current_active_user)])
 def delete_resource(
     *,
     session: Session = Depends(get_session),

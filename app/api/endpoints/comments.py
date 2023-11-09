@@ -1,14 +1,14 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_comment import comment
 from app.schemas.comment import CommentUpdate, CommentRead, CommentCreate
 
 router = APIRouter()
 
-@router.get("/comments", response_model=List[CommentRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/comments", response_model=List[CommentRead], dependencies=[Depends(get_current_active_user)])
 def get_comments(
     *, 
     session: Session = Depends(get_session),
@@ -20,7 +20,7 @@ def get_comments(
 
 
 
-@router.post("/comments", response_model=CommentCreate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/comments", response_model=CommentCreate, dependencies=[Depends(get_current_active_user)])
 def create_comment(
     *,
     session: Session = Depends(get_session),
@@ -36,7 +36,7 @@ def create_comment(
 
 
 
-@router.get("/comments/{name}", response_model=CommentRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/comments/{name}", response_model=CommentRead, dependencies=[Depends(get_current_active_user)])
 def get_comment(
     *,
     session: Session = Depends(get_session),
@@ -51,7 +51,7 @@ def get_comment(
     return db_comment
 
 
-@router.put("/comments", response_model=CommentRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/comments", response_model=CommentRead, dependencies=[Depends(get_current_active_user)])
 def update_comment(
     *,
     session: Session = Depends(get_session),
@@ -68,7 +68,7 @@ def update_comment(
 
 
 
-@router.delete("/comments", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/comments", dependencies=[Depends(get_current_active_user)])
 def delete_comment(
     *,
     session: Session = Depends(get_session),

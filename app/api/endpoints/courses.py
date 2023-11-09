@@ -1,14 +1,14 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_course import course
 from app.schemas.course import CourseUpdate, CourseRead, CourseCreate
 
 router = APIRouter()
 
-@router.get("/courses", response_model=List[CourseRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/courses", response_model=List[CourseRead], dependencies=[Depends(get_current_active_user)])
 def get_courses(
     *, 
     session: Session = Depends(get_session),
@@ -20,7 +20,7 @@ def get_courses(
 
 
 
-@router.post("/courses", response_model=CourseCreate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/courses", response_model=CourseCreate, dependencies=[Depends(get_current_active_user)])
 def create_course(
     *,
     session: Session = Depends(get_session),
@@ -42,7 +42,7 @@ def create_course(
 
 
 
-@router.get("/courses/{course_code}", response_model=CourseRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/courses/{course_code}", response_model=CourseRead, dependencies=[Depends(get_current_active_user)])
 def get_course(
     *,
     session: Session = Depends(get_session),
@@ -57,7 +57,7 @@ def get_course(
     return db_course
 
 
-@router.put("/courses", response_model=CourseRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/courses", response_model=CourseRead, dependencies=[Depends(get_current_active_user)])
 def update_course(
     *,
     session: Session = Depends(get_session),
@@ -74,7 +74,7 @@ def update_course(
 
 
 
-@router.delete("/courses", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/courses", dependencies=[Depends(get_current_active_user)])
 def delete_course(
     *,
     session: Session = Depends(get_session),

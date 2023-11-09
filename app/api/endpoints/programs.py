@@ -1,14 +1,14 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from app.api.deps import get_current_active_superuser
+from app.api.deps import get_current_active_superuser, get_current_active_user
 from app.core.deps import get_session
 from app.crud.crud_program import program
 from app.schemas.program import ProgramUpdate, ProgramRead, ProgramCreate
 
 router = APIRouter()
 
-@router.get("/programs", response_model=List[ProgramRead], dependencies=[Depends(get_current_active_superuser)])
+@router.get("/programs", response_model=List[ProgramRead], dependencies=[Depends(get_current_active_user)])
 def get_programs(
     *, 
     session: Session = Depends(get_session),
@@ -20,7 +20,7 @@ def get_programs(
 
 
 
-@router.post("/programs", response_model=ProgramCreate, dependencies=[Depends(get_current_active_superuser)])
+@router.post("/programs", response_model=ProgramCreate, dependencies=[Depends(get_current_active_user)])
 def create_program(
     *,
     session: Session = Depends(get_session),
@@ -42,7 +42,7 @@ def create_program(
 
 
 
-@router.get("/programs/{id}", response_model=ProgramRead, dependencies=[Depends(get_current_active_superuser)])
+@router.get("/programs/{id}", response_model=ProgramRead, dependencies=[Depends(get_current_active_user)])
 def get_program(
     *,
     session: Session = Depends(get_session),
@@ -57,7 +57,7 @@ def get_program(
     return db_program
 
 
-@router.put("/programs", response_model=ProgramRead, dependencies=[Depends(get_current_active_superuser)])
+@router.put("/programs", response_model=ProgramRead, dependencies=[Depends(get_current_active_user)])
 def update_program(
     *,
     session: Session = Depends(get_session),
@@ -74,7 +74,7 @@ def update_program(
 
 
 
-@router.delete("/programs", dependencies=[Depends(get_current_active_superuser)])
+@router.delete("/programs", dependencies=[Depends(get_current_active_user)])
 def delete_program(
     *,
     session: Session = Depends(get_session),
