@@ -24,13 +24,13 @@ def get_reports(
 def create_report(
     *,
     session: Session = Depends(get_session),
-    like_in: ReportUpdate,
+    report_in: ReportUpdate,
 
     ):
 
     
 
-    new_report = report.create(session=session, obj_in=like_in)
+    new_report = report.create(session=session, obj_in=report_in)
     return new_report
 
 
@@ -55,10 +55,10 @@ def get_report(
 def update_report(
     *,
     session: Session = Depends(get_session),
-    like_in: ReportCreate,
+    report_in: ReportCreate,
     id: int
     ):
-    updated_report = report.update(session=session, id=id, obj_in=like_in)
+    updated_report = report.update(session=session, id=id, obj_in=report_in)
     if not updated_report:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

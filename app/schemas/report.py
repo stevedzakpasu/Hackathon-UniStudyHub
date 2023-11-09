@@ -24,7 +24,7 @@ class ReportRead(ReportBase):
 
 
 class ReportUpdate(SQLModel): 
-    pass
+    resource_id: Optional[int] = None
 
 
 

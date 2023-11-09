@@ -1,4 +1,8 @@
 from typing import List
+from fastapi import UploadFile, File
+from mega import Mega
+import tempfile
+import os
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 from app.api.deps import get_current_active_superuser
@@ -20,25 +24,40 @@ def get_resources(
 
 
 
+# Assuming `resource_in` contains the URL field, modify the function signature accordingly if needed.
 @router.post("/resources", response_model=ResourceCreate, dependencies=[Depends(get_current_active_superuser)])
 def create_resource(
     *,
     session: Session = Depends(get_session),
     resource_in: ResourceCreate,
+    uploaded_file: UploadFile = File(...),  # Include UploadFile parameter for file upload
+):
+    # Save the uploaded file temporarily
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(uploaded_file.file.read())
+        temp_file_path = temp_file.name
 
-    ):
-    db_resource= resource.get_by_description(session=session, description=resource_in.description)
-    
-    if db_resource:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="resource with this resource name already exists"
-        )
-    
+    # Initialize Mega client
+    mega = Mega()
+    m = mega.login('unistudyhub@gmail.com', 'UniStudyHub@2023')
 
+    # Upload the file to Mega
+    mega_file = m.upload(temp_file_path)
+
+    # Get the Mega download link
+    mega_link = mega.get_upload_link(mega_file)
+
+    # Clean up the temporary file
+    os.remove(temp_file_path)
+
+    # Assign the Mega download link to the URL field in resource_in
+    resource_in.url = mega_link
+
+
+    # Create the resource in your database using resource.create() function (assuming it's defined somewhere)
     new_resource = resource.create(session=session, obj_in=resource_in)
-    return new_resource
 
+    return new_resource
 
 
 
