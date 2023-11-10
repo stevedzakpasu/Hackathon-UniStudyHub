@@ -1,8 +1,5 @@
 # Hackathon-UniStudyHub
 
-
-
-
 <p align="center">
   <a href="#Introduction">Introduction</a> •
   <a href="#key-features">Key Features</a> •
@@ -11,6 +8,9 @@
   <a href="#related">Related</a> •
 </p>
 
+## Introduction
+This project, aptly named "Bridging the Gap in Educational Materials Sharing Among Students," aims to revolutionize the way students access and share educational resources. In a world where learning materials are abundant but often scattered, our goal is to create a seamless and efficient platform for the exchange of knowledge.
+We recognize the challenges students face in accessing diverse learning resources, and we aspire to provide a solution that simplifies this process. By fostering a collaborative environment, we aim to empower students to easily discover, share, and engage with educational content.
 
 ## Key Features
 
@@ -43,7 +43,7 @@ $ uvicorn main:app --reload
 
 This software uses the following open source packages:
 
-- [Uvicorn]([http://electron.atom.io/](https://www.uvicorn.org/))
+- [Uvicorn](https://www.uvicorn.org/)
 - [SQLModel](https://sqlmodel.tiangolo.com/)
 - [Alembic](https://alembic.sqlalchemy.org/en/latest/)
 
