@@ -1,4 +1,7 @@
-# Hackathon-UniStudyHub
+# Hackathon-UniStudyHub-Backend
+
+
+This repository houses the server-side components that power our application, and it's built on two powerful frameworks: FastAPI and SQLModel. 
 
 <p align="center">
   <a href="#Introduction">Introduction</a> •
@@ -22,7 +25,7 @@ We recognize the challenges students face in accessing diverse learning resource
 
 ## Install
 
-To clone and run this application, you'll need [Python3.10.5]([https://git-scm.com](https://www.python.org/downloads/release/python-3105/)) and [Fast API]([https://nodejs.org/en/download/](https://fastapi.tiangolo.com/))) installed on your computer. From your command line:
+To clone and run this application, you'll need [Python3.10.5][https://git-scm.com](https://www.python.org/downloads/release/python-3105/) and [Fast API]([https://nodejs.org/en/download/](https://fastapi.tiangolo.com/))) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
