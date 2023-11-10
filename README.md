@@ -2,11 +2,14 @@
 
 
 This repository houses the server-side components that power our application, and it's built on two powerful frameworks: FastAPI and SQLModel. 
+[![PyPI version](https://badge.fury.io/py/fastapi.svg)](https://badge.fury.io/py/fastapi)
+[![PyPI version](https://badge.fury.io/py/sqlmodel.svg)](https://badge.fury.io/py/sqlmodel)
 
 <p align="center">
   <a href="#Introduction">Introduction</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#Install">Install</a> •
+  <a href="#Project-Structure">Project Structure</a> •
   <a href="#credits">Credits</a> •
   <a href="#related">Related</a> •
 </p>
@@ -41,6 +44,8 @@ $ pip install -r requirements.txt
 $ uvicorn main:app --reload
 ```
 
+
+## Project-Structure
 
 ## Credits
 
