@@ -40,8 +40,14 @@ $ cd Hackathon-UniStudyHub
 # Install Requirements
 $ pip install -r requirements.txt
 
+
+# make migrations with
+$ alembic revision --autogenerate -m "the message"
+$ alembic upgrade head
+
 # Run 
 $ uvicorn main:app --reload
+
 ```
 
 
