@@ -55,6 +55,10 @@ $ uvicorn main:app --reload
 
 ## Credits
 
+- [Stephen](https://github.com/stevedzakpasu)
+- [Frank](https://github.com/dacostafrankaboagye)
+
+
 This software uses the following open source packages:
 
 - [Uvicorn](https://www.uvicorn.org/)
