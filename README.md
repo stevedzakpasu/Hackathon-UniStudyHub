@@ -7,12 +7,12 @@ This repository houses the server-side components that power our application, an
 Front-end repo :point_right: (https://github.com/elitekaycy/unistudyhub-web)
 
 <p align="center">
-  <a href="#Introduction">Introduction</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#Install">Install</a> •
-  <a href="#Project-Structure">Project Structure</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
+  <a href="#Introduction">Introduction</a> :large_blue_circle:
+  <a href="#key-features">Key Features</a> :large_blue_circle:
+  <a href="#Install">Install</a> :large_blue_circle:
+  <a href="#Project-Structure">Project Structure</a> :large_blue_circle:
+  <a href="#credits">Credits</a> :large_blue_circle:
+  <a href="#related">Related</a> :large_blue_circle:
 </p>
 
 ## Introduction
