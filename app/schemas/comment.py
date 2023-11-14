@@ -3,11 +3,7 @@ from typing import TYPE_CHECKING, List, Optional
 from sqlmodel import Relationship, SQLModel, Field, Column, String
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
-
 from app.models.resource import Resource
-
-
-
 
 class CommentBase(SQLModel):
     text : str = Field(
@@ -20,10 +16,8 @@ class CommentBase(SQLModel):
 class CommentCreate(CommentBase):
     pass
 
-
 class CommentRead(CommentBase):
     id: int
-
 
 class CommentUpdate(SQLModel): 
     text: Optional[str] = None
