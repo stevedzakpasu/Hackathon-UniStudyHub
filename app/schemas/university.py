@@ -10,22 +10,15 @@ if TYPE_CHECKING:
 
 
 class UniversityBase(SQLModel):
-    name : str = Field(
-        index=True, sa_column=Column("name", String, unique=True))
+    name : str = Field(index=True, sa_column=Column("name", String, unique=True))
     users: List["User"] = Relationship(back_populates="university")
     courses: List["Course"] = Relationship(back_populates="university")
 
 class UniversityCreate(SQLModel):
-    name : str = Field(
-        index=True, sa_column=Column("course_code", String, unique=True))
-
-
+    name : str = Field(index=True, sa_column=Column("course_code", String, unique=True))
 
 class UniversityRead(UniversityBase):
     id: int
 
-
 class UniversityUpdate(SQLModel): 
     name: Optional[str] = None
-
-
