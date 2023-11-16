@@ -64,7 +64,7 @@ $ alembic upgrade head
 # Run 
 $ uvicorn main:app --reload
 
-# proceed to
+# proceed to the url, and authenticate
 http://127.0.0.1:8000/docs
 
 ```
