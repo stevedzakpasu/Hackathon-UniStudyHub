@@ -49,16 +49,26 @@ myvenv\Scripts\activate
 # Install Requirements
 $ pip install -r requirements.txt
 
+# manually delete any version of the migration
+# add the .env file with the details
 
 # make migrations with
 $ alembic revision --autogenerate -m "the message"
+
+# go into the migration file (Under - alembic folder -> versions) and add the import below
+import sqlmodel.sql.sqltypes
+
+# upgrade head
 $ alembic upgrade head
 
 # Run 
 $ uvicorn main:app --reload
 
-```
+# proceed to
+http://127.0.0.1:8000/docs
 
+```
+simple!! :smiley:
 
 ## Project-Structure
 
