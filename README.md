@@ -4,6 +4,8 @@
 This repository houses the server-side components that power our application, and it's built on two powerful frameworks: FastAPI and SQLModel. 
 [![PyPI version](https://badge.fury.io/py/fastapi.svg)](https://badge.fury.io/py/fastapi)
 
+<a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" style="width: 20%;"></a>
+
 Front-end repo :point_right: (https://github.com/elitekaycy/unistudyhub-web)
 
 <p align="center">
