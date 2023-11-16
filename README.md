@@ -41,6 +41,11 @@ $ git clone https://github.com/stevedzakpasu/Hackathon-UniStudyHub.git
 # Go into the repository
 $ cd Hackathon-UniStudyHub
 
+# create a virtual env annd activate
+- on cmd
+python -m venv myvenv
+myvenv\Scripts\activate
+
 # Install Requirements
 $ pip install -r requirements.txt
 
