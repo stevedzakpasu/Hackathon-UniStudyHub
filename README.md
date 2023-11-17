@@ -7,8 +7,10 @@ This repository houses the server-side components that power our application, an
 <a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" style="width: 20%;"></a>
 <a href="https://sqlmodel.tiangolo.com"><img src="https://sqlmodel.tiangolo.com/img/logo-margin/logo-margin-vector.svg" style="width: 20%;"></a>
 
-Resource Storage Platform
-<img class="avatar mr-2 d-none d-md-block" alt="Owner avatar" src="https://avatars.githubusercontent.com/u/64530241?s=48&amp;v=4" width="24" height="24">
+Resource Storage Platform 
+Mega
+<a href="https://pypi.org/project/mega.py/"><img class="avatar mr-2 d-none d-md-block" alt="Owner avatar" src="https://avatars.githubusercontent.com/u/64530241?s=48&amp;v=4" width="24" height="24"></a>
+
 
 Front-end repo :point_right: (https://github.com/elitekaycy/unistudyhub-web)
 
